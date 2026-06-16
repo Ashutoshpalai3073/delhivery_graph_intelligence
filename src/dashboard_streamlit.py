@@ -82,10 +82,12 @@ st.markdown(f"""
     border-radius: 10px;
     padding: 1rem 1.25rem 0.9rem 1.25rem;
     box-shadow: 0 4px 16px rgba(0,0,0,0.35);
-    min-height: 110px;
+    min-height: 130px;
+    max-height: 130px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
   }}
   .kpi-value {{
     font-size: 1.7rem;
@@ -94,6 +96,9 @@ st.markdown(f"""
     line-height: 1.1;
     margin-bottom: 0.2rem;
     letter-spacing: -0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }}
   .kpi-label {{
     font-size: 0.72rem;
@@ -289,8 +294,12 @@ st.markdown(f"""
 med_fac = f"{legs['factor'].median():.2f}×" if legs is not None else "—"
 pct_br  = (f"{legs['is_delayed_20'].mean() * 100:.1f} %"
            if legs is not None else "—")
-top_hub = (hubs.iloc[0]["name"].split(" (")[0].replace("_", " ")
-           if hubs is not None and len(hubs) else "—")
+if hubs is not None and len(hubs):
+    _raw = hubs.iloc[0]["name"].split("(")[0].strip().replace("_", " ")
+    _parts = _raw.split()
+    top_hub = _raw if len(_raw) <= 14 else _parts[0][:3].upper() + " " + " ".join(_parts[1:])
+else:
+    top_hub = "—"
 mae_imp = (f"{comp.iloc[1]['MAE_improvement_%']:.1f} %"
            if comp is not None else "—")
 
