@@ -96,9 +96,8 @@ st.markdown(f"""
     line-height: 1.1;
     margin-bottom: 0.2rem;
     letter-spacing: -0.02em;
-    white-space: nowrap;
+    white-space: normal;
     overflow: hidden;
-    text-overflow: ellipsis;
   }}
   .kpi-label {{
     font-size: 0.72rem;
@@ -297,7 +296,7 @@ pct_br  = (f"{legs['is_delayed_20'].mean() * 100:.1f} %"
 if hubs is not None and len(hubs):
     _raw = hubs.iloc[0]["name"].split("(")[0].strip().replace("_", " ")
     _parts = _raw.split()
-    top_hub = _raw if len(_raw) <= 14 else _parts[0][:3].upper() + " " + " ".join(_parts[1:])
+    top_hub = _parts[0][:3].upper() + " " + _parts[1] if len(_parts) > 1 else _parts[0]
 else:
     top_hub = "—"
 mae_imp = (f"{comp.iloc[1]['MAE_improvement_%']:.1f} %"
