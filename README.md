@@ -7,6 +7,8 @@ logistics network as a **directed weighted graph** (facilities = nodes, corridor
 Submission for the Summer Analytics graph-analytics challenge. Every number in
 the strategy memo is reproduced by the code in `src/`.
 
+**Live dashboard:** https://delhivery-graph-intelligence.streamlit.app
+
 ---
 
 ## TL;DR results
@@ -52,7 +54,8 @@ delhivery_graph_intelligence/
 ## How to run
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements-dev.txt   # full pipeline (graph + ML phases)
+# requirements.txt is the slim set the hosted dashboard needs (streamlit/pandas/numpy/altair)
 
 # from the project root, regenerate everything:
 python run_all.py --raw path/to/delivery_data.csv

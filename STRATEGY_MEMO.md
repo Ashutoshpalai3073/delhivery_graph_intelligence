@@ -3,6 +3,8 @@
 **To:** Head of Network Operations  **From:** Data Science Team  **Re:** ETA accuracy & bottleneck remediation
 **Analysis window:** 12 Sep – 6 Oct 2018 · 14,817 trips · 26,369 corridor legs · 1,657 facilities
 
+> **▶ Live interactive dashboard:** [delhivery-graph-intelligence.streamlit.app](https://delhivery-graph-intelligence.streamlit.app) — hosted on Streamlit Cloud (first load may take ~30s if the app is asleep)
+
 ---
 
 ## Executive summary

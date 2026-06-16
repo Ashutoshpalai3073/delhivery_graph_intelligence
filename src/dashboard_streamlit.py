@@ -82,7 +82,10 @@ st.markdown(f"""
     border-radius: 10px;
     padding: 1rem 1.25rem 0.9rem 1.25rem;
     box-shadow: 0 4px 16px rgba(0,0,0,0.35);
-    height: 100%;
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }}
   .kpi-value {{
     font-size: 1.7rem;
@@ -286,7 +289,7 @@ st.markdown(f"""
 med_fac = f"{legs['factor'].median():.2f}×" if legs is not None else "—"
 pct_br  = (f"{legs['is_delayed_20'].mean() * 100:.1f} %"
            if legs is not None else "—")
-top_hub = (hubs.iloc[0]["name"].split(" (")[0]
+top_hub = (hubs.iloc[0]["name"].split(" (")[0].replace("_", " ")
            if hubs is not None and len(hubs) else "—")
 mae_imp = (f"{comp.iloc[1]['MAE_improvement_%']:.1f} %"
            if comp is not None else "—")
@@ -989,6 +992,6 @@ st.markdown(f"""
   The model is evaluated on a trip-grouped hold-out (no leakage across legs from
   the same trip). The 11.6 % MAE improvement is real but modest — graph features
   add interpretable structural context, not a step-change in raw predictive accuracy.
-  The baseline already achieves R² = {base_row['R2']:.3f if comp is not None else '0.975'}.
+  The baseline already achieves R² = """ + (f"{base_row['R2']:.3f}" if comp is not None else "0.975") + """.
 </div>
 """, unsafe_allow_html=True)
